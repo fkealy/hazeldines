@@ -111,25 +111,23 @@
     if (prefersReduced) { killPreloader(); return; }
 
     var tl = gsap.timeline();
-    var word = new SplitText(".preloader__word", { type: "chars" });
 
     tl.from(".preloader__mark", { scale: 0.6, opacity: 0, duration: 0.7, ease: "back.out(1.6)" })
-      .from(word.chars, { yPercent: 110, opacity: 0, stagger: 0.04, duration: 0.55, ease: "power3.out" }, "-=0.35")
+      .from(".preloader__word", { y: 26, opacity: 0, duration: 0.6, ease: "power3.out" }, "-=0.3")
       .to(".preloader__inner", { opacity: 0, duration: 0.4, delay: 0.35 })
       .add(killPreloader);
 
-    /* hero */
-    var heroTitle = new SplitText(".hero__title", { type: "chars" });
+    /* hero — official wordmark reveals as one piece */
     tl.from(".hero__ornament", { scale: 0, rotate: -14, duration: 0.9, ease: "back.out(1.7)" }, "-=0.15")
-      .from(heroTitle.chars, {
-        yPercent: 120,
-        rotate: function () { return gsap.utils.random(-9, 9); },
+      .from(".hero__wordmark", {
+        y: 34,
         opacity: 0,
-        stagger: 0.045,
-        duration: 0.9,
+        scale: 0.95,
+        transformOrigin: "50% 100%",
+        duration: 1.0,
         ease: "power4.out"
       }, "-=0.5")
-      .from(".hero__sub", { y: 28, opacity: 0, duration: 0.7, ease: "power3.out" }, "-=0.45")
+      .from(".hero__sub", { y: 28, opacity: 0, duration: 0.7, ease: "power3.out" }, "-=0.5")
       .from(".hero__ctas .btn", { y: 22, opacity: 0, stagger: 0.1, duration: 0.55, ease: "power3.out" }, "-=0.4")
       .from(".hero__cup", { y: 40, opacity: 0, duration: 0.7, ease: "power3.out" }, "-=0.4")
       .from(".hero__scrollhint", { opacity: 0, duration: 0.6 }, "-=0.2");
